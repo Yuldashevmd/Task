@@ -49,8 +49,8 @@ h2{
 }
 `;
 export const Input = styled.input `
-width:${props=>props.type=='text'? '90%':'fit-content'};
-height: ${props=>props.type=='text'? '45px':'fit-content'};;
+width:${props=>props.type=='text'|| props.type =='password'? '90%' : 'fit-content'};
+height: ${props=>props.type=='text'|| props.type =='password' ? '45px' : 'fit-content'};;
 padding: 5px;
 margin: 2rem 0;
 border-radius: 6px;

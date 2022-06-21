@@ -1,12 +1,16 @@
 import React, { createContext, useState } from 'react';
 
+export const UserContext =createContext();
 const Context = ({children}) => {
-  const Context =createContext();
-  const [data,setData] =useState();
+  const [info,setInfo]=useState({
+    token:null,
+    user:{}
+  });
+
   return (
-    <Context.Provider value={data}>
+    <UserContext.Provider value={[info,setInfo]}>
       {children}
-    </Context.Provider>
+    </UserContext.Provider>
   );
 };
 
