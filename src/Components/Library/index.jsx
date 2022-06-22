@@ -7,7 +7,7 @@ import {UserContext} from '../Context';
 
 const Library = () => {
   const [dataCon, setData] = useState();
-  const [info,setInfo]= useContext(UserContext);
+  const [info]= useContext(UserContext);
 
   useEffect(() => {
     fetch(`${basicUrl}/user/category?page=1&limit=5`)
@@ -27,7 +27,7 @@ const Library = () => {
           <Books>
             {item?.books.map((value) => (
               <Book key={value?._id}>
-                <img src={`${basicUrl}/${value?.imgUrl}`} />
+                <img src={`${basicUrl}/${value?.imgUrl}`} alt='img' />
                 <button onClick={()=> navigate(info?.token ? `/library:${value._id}`:'/login')}>{value?.name}</button>
               </Book>
             ))}

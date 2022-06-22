@@ -23,7 +23,7 @@ const Content = () => {
             return val._id === id.replace(':','');
           }).map(value=>(
             <Wrapper key={value?._id}>
-              <img src={`${basicUrl}/${value?.imgUrl}`} />
+              <img src={`${basicUrl}/${value?.imgUrl}`} alt='img'/>
               <h1>{value?.name}</h1>
             </Wrapper>
           ))
