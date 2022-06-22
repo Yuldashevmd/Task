@@ -8,7 +8,9 @@ const Login = () => {
   const [password,setPassword]=useState();
   const [info,setInfo]=useContext(UserContext);
   
-  const onSubmit=()=>{
+  
+  const onSubmit=(e)=>{
+    e.preventDefault();
     fetch('https://coursesnodejs.herokuapp.com/user/sign-in',{
       method:"POST",
       headers:{
@@ -23,10 +25,12 @@ const Login = () => {
       if(res?.statusCode === 200){
         setInfo({
           ...info,
-          token: res?.token,
-          user:res?.user,
+          token: res?.data?.token,
+          user:res?.data?.user,
         });
         navigate('/library') 
+      }else{
+        alert('Password is wrong!...')
       }
   })};
 

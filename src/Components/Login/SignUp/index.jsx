@@ -7,7 +7,8 @@ const SignUp = () => {
   const [login,setLogin]=useState();
   const [password,setPassword]=useState();
 
-  const onSubmit=()=>{
+  const onSubmit=(e)=>{
+    e.preventDefault();
     fetch('https://coursesnodejs.herokuapp.com/user/sign-up',{
       method:"POST",
       headers:{
