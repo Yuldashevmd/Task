@@ -1,44 +1,70 @@
-import React, { useState } from 'react';
-import { BackBtn, Button, CheckBox, Container, FormBlock, Input } from '../style';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import {
+  BackBtn,
+  Button,
+  CheckBox,
+  Container,
+  FormBlock,
+  Input,
+} from "../style";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const navigate =useNavigate();
-  const [login,setLogin]=useState();
-  const [password,setPassword]=useState();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState();
 
-  const onSubmit=(e)=>{
+  const onSubmit = (e) => {
     e.preventDefault();
-    fetch('https://coursesnodejs.herokuapp.com/user/sign-up',{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
+    fetch("https://coursesnodejs.herokuapp.com/user/sign-up", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify({
-       login,
-       password
+      body: JSON.stringify({
+        title: "userInfo",
+        fullName: userData.login,
+        password: userData.password,
       }),
     })
-    .then(res=>res.json())
-    .then(res=>res?.statusCode === 200 && navigate('/login'))
+      .then((res) => res.json())
+      .then((res) => res?.statusCode === 200 && navigate("/login"));
+  };
+
+  const onChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
     <Container>
-    <FormBlock>
-      <BackBtn onClick={()=>navigate('/')}>{'<'}</BackBtn>
-    <FormBlock.Form htmlFor='post'>
-      <h2>Sign Up</h2>
-      <Input onChange={({target:{value}})=>setLogin(value)} type='text' placeholder='Login'/>
-      <Input onChange={({target:{value}})=>setPassword(value)} type='password' placeholder='Password'/>
-      <CheckBox>
-      <Input type='checkbox' name='checkbox'/>
-      <label htmlFor='checkbox'>Remember me</label>
-      </CheckBox>
-      <Button onClick={onSubmit}>Sign Up</Button>
-    </FormBlock.Form>
-   </FormBlock>
-    <Container.Button onClick={()=>navigate('/login')}>Sign In</Container.Button>
+      <FormBlock>
+        <BackBtn onClick={() => navigate("/")}>{"<"}</BackBtn>
+        <FormBlock.Form>
+          <h2>Sign Up</h2>
+          <Input
+            onChange={onChange}
+            type="text"
+            placeholder="Login"
+            name="login"
+          />
+          <Input
+            onChange={onChange}
+            type="password"
+            placeholder="Password"
+            name="password"
+          />
+          <CheckBox>
+            <Input type="checkbox" name="checkbox" />
+            <label htmlFor="checkbox">Remember me</label>
+          </CheckBox>
+          <Button onClick={onSubmit}>Sign Up</Button>
+        </FormBlock.Form>
+      </FormBlock>
+      <Container.Button onClick={() => navigate("/login")}>
+        Sign In
+      </Container.Button>
     </Container>
   );
 };
