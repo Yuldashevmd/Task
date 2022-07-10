@@ -5,7 +5,7 @@ import { UserContext } from "../Context";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [info, setInfo] = useContext(UserContext);
+  const [info] = useContext(UserContext);
 
   return (
     <Container>
