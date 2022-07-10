@@ -14,7 +14,7 @@ const User = () => {
     })
       .then((res) => res.json())
       .then((res) => setCourse(res?.message));
-  }, [course]);
+  }, [info]);
   return (
     <>
       <Navbar />
